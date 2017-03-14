@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Quote By Hacktiv</title>
+  </head>
+  <body>
+
+    <div id="list-quote">
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $.ajax({
+      url: "http://localhost:3000/api/quotes",
+      type: 'GET',
+      success: function( result ) {
+        var temp = []
+        var randomNumber = 0;
+
+        for (var i = 0; i < result.length; i++) {
+          temp[temp.length] = { title: result[i].quote, description: result[i].quoteDescription }
+        }
+
+        randomNumber = Math.floor(Math.random() * temp.length)
+        console.log(temp);
+        console.log(randomNumber);
+
+        $( "#list-quote" ).html(`
+            <H1>${ temp[randomNumber].title }</H1>
+            <H4>${temp[randomNumber].description}</H4>
+        `);
+      }
+    });
+    </script>
+  </body>
+</html>
